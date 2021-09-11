@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_10"
+    android:background="@color/setBackGround"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30">
+
+        <ImageView
+            android:id="@+id/hint"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:scaleType="centerInside"
+            android:src="@drawable/hint" />
+
+        <ImageView
+            android:id="@+id/choose"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/choose" />
+
+        <ImageView
+            android:id="@+id/center"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:src="@drawable/light"
+            android:scaleType="centerInside"
+            android:layout_centerInParent="true"/>
+
+        <ImageView
+            android:id="@+id/light_dowm"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:src="@drawable/downlight"
+            android:scaleType="centerInside"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_toLeftOf="@+id/center"/>
+        <ImageView
+            android:id="@+id/light_up"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:src="@drawable/uplight"
+            android:scaleType="centerInside"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_toRightOf="@+id/center"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

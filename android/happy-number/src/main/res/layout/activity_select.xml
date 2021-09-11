@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".SelectActivity">
+
+<TableRow android:layout_weight="1">
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:onClick="onOne"
+        android:src="@drawable/on1_24_1" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:onClick="onTwo"
+        android:src="@drawable/on2_24" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:onClick="onThree"
+        android:src="@drawable/on3_24" />
+</TableRow>
+
+<TableRow android:layout_weight="1">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="onFour"
+            android:src="@drawable/on4_24" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="onFive"
+            android:src="@drawable/on5_24" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="onSix"
+            android:src="@drawable/on6_24" />
+</TableRow>
+
+<TableRow android:layout_weight="1">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="onSeven"
+            android:src="@drawable/on7_24" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="onEight"
+            android:src="@drawable/on8_24" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="onNine"
+            android:src="@drawable/on9_24" />
+</TableRow>
+
+<TableRow android:layout_weight="1">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="onZero"
+            android:src="@drawable/on0_24" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"/>
+</TableRow>
+</TableLayout>
