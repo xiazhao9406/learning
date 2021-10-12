@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "android"
 include 'happy-number'
 include ':mymirror'
+include ':notes'
