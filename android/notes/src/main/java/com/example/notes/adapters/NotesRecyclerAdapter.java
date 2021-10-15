@@ -11,27 +11,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.notes.R;
 import com.example.notes.models.Note;
 
+
 import java.util.ArrayList;
 
-public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdapter.ViewHolder>{
+public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdapter.ViewHolder> {
 
-    private ArrayList<Note> mNotes = new ArrayList<Note>();
+    private ArrayList<Note> mNotes;
 
-    public NotesRecyclerAdapter(ArrayList<Note> notes) {
-        this.mNotes = notes;
+    public NotesRecyclerAdapter(ArrayList<Note> mNotes) {
+        this.mNotes = mNotes;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_notes_list_item, viewGroup, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_notes_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.timestamp.setText(mNotes.get(position).getTimeStamp());
-        viewHolder.title.setText(mNotes.get(position).getTitle());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+
+        holder.timestamp.setText(mNotes.get(position).getTimestamp());
+        holder.title.setText(mNotes.get(position).getTitle());
     }
 
     @Override
@@ -40,12 +43,14 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView timestamp, title;
 
-        private TextView title, timestamp;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.note_title);
             timestamp = itemView.findViewById(R.id.note_timestamp);
+            title = itemView.findViewById(R.id.note_title);
+
         }
     }
+
 }

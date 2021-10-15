@@ -1,17 +1,19 @@
 package com.example.notes.models;
 
 public class Note {
+
     private String title;
     private String content;
-    private String timeStamp;
+    private String timestamp;
 
-    public Note(String title, String content, String timeStamp) {
+    public Note(String title, String content, String timestamp) {
         this.title = title;
         this.content = content;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
     }
 
     public Note() {
+
     }
 
     public String getTitle() {
@@ -30,12 +32,12 @@ public class Note {
         this.content = content;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     @Override
@@ -43,7 +45,7 @@ public class Note {
         return "Note{" +
                 "title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", timeStamp='" + timeStamp + '\'' +
+                ", timestamp='" + timestamp + '\'' +
                 '}';
     }
 }
