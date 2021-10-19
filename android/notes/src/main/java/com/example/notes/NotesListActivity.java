@@ -3,6 +3,8 @@ package com.example.notes;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +35,8 @@ public class NotesListActivity extends Activity {
 
         initRecyclerView();
         insertFakeNotes();
+        Toolbar toolbar = findViewById(R.id.notes_toolbar);
+        toolbar.setTitle("Notes");
     }
 
     private void insertFakeNotes(){
