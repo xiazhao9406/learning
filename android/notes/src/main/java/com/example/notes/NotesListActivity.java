@@ -63,8 +63,10 @@ public class NotesListActivity extends Activity implements NotesRecyclerAdapter.
 
     @Override
     public void onNoteClick(int position) {
+
         mNotes.get(position);
         Intent intent = new Intent(this, NoteActivity.class);
+        intent.putExtra("selected_notes", mNotes.get(position));
         startActivity(intent);
     }
 }
