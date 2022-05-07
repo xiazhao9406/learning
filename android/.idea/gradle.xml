@@ -10,6 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/food-recipes" />
             <option value="$PROJECT_DIR$/happy-number" />
             <option value="$PROJECT_DIR$/mymirror" />
             <option value="$PROJECT_DIR$/notes" />
