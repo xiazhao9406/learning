@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private Button addButton;
     private RecyclerView recyclerView;
     private TimerAdapter timerAdapter;
-    private Button deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,5 @@ public class MainActivity extends AppCompatActivity {
                 timerAdapter.addTimer(timerItem);
             }
         });
-
-        deleteButton = findViewById(R.id.delete_button);
     }
 }

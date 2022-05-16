@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
     private static final String TAG = TimerAdapter.class.getSimpleName();
     private static final String DATE_FORMAT_PATTERN = "HH:mm:ss";
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
+    private static final long COUNT_DOWN_INTERVAL = 500;
 
     private Handler uiHandler;
     private Thread timeUpdateThread;
@@ -55,6 +57,13 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
         notifyItemInserted(timerItems.size());
     }
 
+    public void removeTimer(TimerItem timerItem) {
+        final int position = timerItems.indexOf(timerItem);
+        timerItems.remove(timerItem);
+        notifyItemRemoved(position);
+        Log.i(TAG, "removeTimer at position " + position);
+    }
+
     private void startCountDown() {
         if (timeUpdateThread != null) {
             return;
@@ -72,7 +81,7 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
 
                 while (true) {
                     try {
-                        sleep(1000 / 30);
+                        sleep(COUNT_DOWN_INTERVAL);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -89,18 +98,38 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
         private final TextView countDown;
         private final TextView start;
         private final TextView end;
+        private final Button deleteButton;
+
+        private TimerItem timerItem;
 
         public TimerViewerHolder(@NonNull View itemView) {
             super(itemView);
             countDown = itemView.findViewById(R.id.count_down);
             start = itemView.findViewById(R.id.start);
             end = itemView.findViewById(R.id.end);
+            deleteButton = itemView.findViewById(R.id.delete_button);
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(TAG, "delete button onClick()");
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (timerItem != null) {
+                                removeTimer(timerItem);
+                            }
+                        }
+                    });
+                }
+            });
         }
 
         private void bindData(TimerItem timerItem) {
             countDown.setText(timerItem.getRemainingTime());
             start.setText(timerItem.start.format(dateTimeFormatter));
             end.setText(timerItem.end.format(dateTimeFormatter));
+            this.timerItem = timerItem;
         }
     }
 }
