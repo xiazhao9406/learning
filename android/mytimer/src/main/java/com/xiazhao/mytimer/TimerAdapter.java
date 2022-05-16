@@ -19,7 +19,7 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
     private static final String TAG = TimerAdapter.class.getSimpleName();
     private static final String DATE_FORMAT_PATTERN = "HH:mm:ss";
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
-    private static final long COUNT_DOWN_INTERVAL = 500;
+    private static final long COUNT_DOWN_INTERVAL = 1000 / 30;
 
     private Handler uiHandler;
     private Thread timeUpdateThread;
@@ -54,10 +54,17 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
             startCountDown();
         }
         timerItems.add(timerItem);
+
+        timerItem.setListener(new TimerItem.CountDownTimeListener() {
+            @Override
+            public void onCountDownTimeChanged() {
+                notifyItemChanged(timerItems.indexOf(timerItem));
+            }
+        });
         notifyItemInserted(timerItems.size());
     }
 
-    public void removeTimer(TimerItem timerItem) {
+    private void removeTimer(TimerItem timerItem) {
         final int position = timerItems.indexOf(timerItem);
         timerItems.remove(timerItem);
         notifyItemRemoved(position);
@@ -75,7 +82,9 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
                 final Runnable UPDATE_RUNNABLE = new Runnable() {
                     @Override
                     public void run() {
-                        notifyDataSetChanged();
+                        for (TimerItem timerItem : timerItems) {
+                            timerItem.updateCountDownTime();
+                        }
                     }
                 };
 
@@ -126,7 +135,7 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
         }
 
         private void bindData(TimerItem timerItem) {
-            countDown.setText(timerItem.getRemainingTime());
+            countDown.setText(timerItem.getCountDownTime());
             start.setText(timerItem.start.format(dateTimeFormatter));
             end.setText(timerItem.end.format(dateTimeFormatter));
             this.timerItem = timerItem;

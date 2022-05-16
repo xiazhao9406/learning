@@ -12,19 +12,42 @@ public class TimerItem {
     private static final String TIME_ZONE = "GMT";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT_PATTERN);
 
+    public interface CountDownTimeListener {
+        void onCountDownTimeChanged();
+    }
+
     static {
         DATE_FORMAT.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
     }
 
+    private CountDownTimeListener listener;
+    private String oldCountDownTime;
+
     public final LocalDateTime start;
     public final LocalDateTime end;
+
 
     public TimerItem(int hours, int minutes) {
         start = LocalDateTime.now();
         end = start.plusHours(hours).plusMinutes(minutes);
+        oldCountDownTime = getCountDownTime();
     }
 
-    public String getRemainingTime() {
+    public String getCountDownTime() {
         return DATE_FORMAT.format(new Date(ChronoUnit.MILLIS.between(LocalDateTime.now(), end)));
+    }
+
+    public void setListener(CountDownTimeListener countDownTimeListener) {
+        listener = countDownTimeListener;
+    }
+
+    public void updateCountDownTime() {
+        String newCountDownTime = getCountDownTime();
+        if (!oldCountDownTime.equals(newCountDownTime)) {
+            oldCountDownTime = newCountDownTime;
+            if (listener != null) {
+                listener.onCountDownTimeChanged();
+            }
+        }
     }
 }
