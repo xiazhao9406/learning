@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyTimer</string>
+
+    <string name="action_add">Add</string>
+    <string name="action_delete">Delete</string>
+
+    <string name="hint_count_down">12:34:56</string>
+    <string name="hint_start">12:34:56</string>
+    <string name="hint_end">12:34:56</string>
+</resources>
