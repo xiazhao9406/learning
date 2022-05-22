@@ -12,24 +12,26 @@ public class TimerItem {
     private static final String TIME_ZONE = "GMT";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT_PATTERN);
 
-    public interface CountDownTimeListener {
-        void onCountDownTimeChanged();
-    }
-
     static {
         DATE_FORMAT.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
     }
 
     private CountDownTimeListener listener;
     private String oldCountDownTime;
+    private boolean isTimeOut = false;
 
     public final LocalDateTime start;
     public final LocalDateTime end;
 
-
-    public TimerItem(int hours, int minutes) {
+    public TimerItem(int minutes) {
+        int hours = minutes / 60;
+        minutes = minutes % 60;
         start = LocalDateTime.now();
-        end = start.plusHours(hours).plusMinutes(minutes);
+        if (Config.debug) {
+            end = start.plusSeconds(minutes);
+        } else {
+            end = start.plusHours(hours).plusMinutes(minutes);
+        }
         oldCountDownTime = getCountDownTime();
     }
 
@@ -42,10 +44,19 @@ public class TimerItem {
     }
 
     public void updateCountDownTime() {
+        if (ChronoUnit.MILLIS.between(LocalDateTime.now(), end) < 0) {
+            if (!isTimeOut) {
+                if (listener != null) {
+                    listener.onTimeUp();
+                }
+            }
+            isTimeOut = true;
+        }
+
         String newCountDownTime = getCountDownTime();
         if (!oldCountDownTime.equals(newCountDownTime)) {
             oldCountDownTime = newCountDownTime;
-            if (listener != null) {
+            if (listener != null && !isTimeOut) {
                 listener.onCountDownTimeChanged();
             }
         }

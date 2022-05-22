@@ -24,6 +24,7 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
     private Handler uiHandler;
     private Thread timeUpdateThread;
     private ArrayList<TimerItem> timerItems = new ArrayList<>();
+    private TimeUpListener timeUpListener;
 
     public TimerAdapter(Handler handler) {
         uiHandler = handler;
@@ -55,10 +56,18 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
         }
         timerItems.add(timerItem);
 
-        timerItem.setListener(new TimerItem.CountDownTimeListener() {
+        timerItem.setListener(new CountDownTimeListener() {
             @Override
             public void onCountDownTimeChanged() {
                 notifyItemChanged(timerItems.indexOf(timerItem));
+            }
+
+            @Override
+            public void onTimeUp() {
+                Log.i(TAG, "onTimeUp()");
+                if (timeUpListener != null) {
+                    timeUpListener.timeUp();
+                }
             }
         });
         notifyItemInserted(timerItems.size());
@@ -100,6 +109,10 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerViewerH
         };
 
         timeUpdateThread.start();
+    }
+
+    public void setTimeUpListener(TimeUpListener timeUpListener) {
+        this.timeUpListener = timeUpListener;
     }
 
     protected class TimerViewerHolder extends RecyclerView.ViewHolder {
