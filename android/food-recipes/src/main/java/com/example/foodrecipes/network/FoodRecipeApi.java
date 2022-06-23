@@ -14,4 +14,6 @@ public interface FoodRecipeApi {
 
     @GET("api/v2/recipes/{recipeId}")
     Call<RecipeDetailsResponse> getRecipeDetail(@Path("recipeId") String recipeId);
+
+    Call<RecipeDetailsResponse> searchRecipe(String baseUrl, String query, String valueOf);
 }

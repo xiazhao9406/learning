@@ -7,8 +7,9 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "android"
-include 'happy-number'
-include ':mymirror'
-include ':notes'
-include ':food-recipes'
-include ':mytimer'
+//include 'happy-number'
+//include ':mymirror'
+//include ':notes'
+//include ':food-recipes'
+//include ':mytimer'
+include ':design-demo'
