@@ -13,3 +13,4 @@ rootProject.name = "android"
 //include ':food-recipes'
 //include ':mytimer'
 include ':design-demo'
+include ':foodrecipes'
